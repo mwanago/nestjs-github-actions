@@ -9,6 +9,6 @@ export default class TestController {
 
   @Get()
   getPostById() {
-    return 3;
+    return 4;
   }
 }
