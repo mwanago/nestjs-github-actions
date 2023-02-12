@@ -6,11 +6,9 @@ on:
       - master
 
 jobs:
-
-  deploy:
-    name: Build image
+  create-docker-image:
+    name: Build and push the Docker image to ECR
     runs-on: ubuntu-latest
-
     steps:
       - name: Check out code
         uses: actions/checkout@v2
@@ -38,6 +36,11 @@ jobs:
           docker tag nestjs-api:latest public.ecr.aws/e2b3j8w6/nestjs-api:latest
           docker push public.ecr.aws/e2b3j8w6/nestjs-api:latest
 
+  deploy:
+    name: Build and deploy the new Docker image to ECS
+    runs-on: ubuntu-latest
+    needs: create-docker-image
+    steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
