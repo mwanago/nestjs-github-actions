@@ -32,8 +32,7 @@ jobs:
           ECR_REPOSITORY: nestjs-api
           IMAGE_TAG: nestjs-api
         run: |
-          docker build -t nestjs-api .
-          docker tag nestjs-api:latest public.ecr.aws/e2b3j8w6/nestjs-api:latest
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
           docker push public.ecr.aws/e2b3j8w6/nestjs-api:latest
 
   deploy:
