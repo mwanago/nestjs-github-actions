@@ -29,11 +29,11 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: nestjs-api
           IMAGE_TAG: nestjs-api
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-          docker push public.ecr.aws/e2b3j8w6/nestjs-api:latest
+          docker build -t $IMAGE_TAG .
+          docker tag $IMAGE_TAG:latest $ECR_REGISTRY/$IMAGE_TAG:latest
+          docker push $ECR_REGISTRY/$IMAGE_TAG:latest
 
   deploy:
     name: Build and deploy the new Docker image to ECS
