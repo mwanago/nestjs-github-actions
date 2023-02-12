@@ -10,8 +10,8 @@ jobs:
     name: Build and push the Docker image to ECR
     runs-on: ubuntu-latest
     steps:
-      - name: Check out code
-        uses: actions/checkout@v2
+      - name: Check out the repository
+        uses: actions/checkout@v3
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -38,7 +38,7 @@ jobs:
           docker push $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:latest
 
   deploy:
-    name: Build and deploy the new Docker image to ECS
+    name: Deploy the new Docker image to ECS
     runs-on: ubuntu-latest
     needs: create-docker-image
     steps:
