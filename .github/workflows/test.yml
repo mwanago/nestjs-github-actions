@@ -2,6 +2,9 @@ name: Test the codebase
 
 on: [pull_request]
 
+env:
+  IMAGE_TAG: nestjs-api
+
 jobs:
   create-docker-image:
     name: Build the Docker image
@@ -11,8 +14,6 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build the docker image
-        env:
-          IMAGE_TAG: nestjs-api
         run: |
           docker build -t $IMAGE_TAG --target=create-build .
 
@@ -25,7 +26,5 @@ jobs:
     needs: create-docker-image
     steps:
       - name: Run prettier
-        env:
-          IMAGE_TAG: nestjs-api
         run: |
           docker run --entrypoint '/bin/sh' $IMAGE_TAG -c 'npm run format:check'
