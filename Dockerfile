@@ -6,7 +6,7 @@ WORKDIR /user/src/app
 
 COPY package.json package-lock.json ./
 
-RUN npm ci --omit=dev
+RUN npm ci
 
 COPY . .
 
@@ -33,5 +33,7 @@ WORKDIR /user/src/app
 COPY --from=install-dependencies /user/src/app/node_modules ./node_modules
 COPY --from=create-build /user/src/app/dist ./dist
 COPY package.json ./
+
+RUN npm prune --production
 
 CMD ["npm", "run", "start:prod"]
