@@ -17,10 +17,10 @@ jobs:
         run: docker build -t $IMAGE_TAG --target=create-build .
 
       - name: Run Prettier
-        run: docker run --entrypoint '/bin/sh' $IMAGE_TAG -c 'npm run format:verify'
+        run: docker run $IMAGE_TAG sh -c 'npm run format:verify'
 
       - name: Run ESLint
-        run: docker run --entrypoint '/bin/sh' $IMAGE_TAG -c 'npm run lint'
+        run: docker run $IMAGE_TAG sh -c 'npm run lint'
 
       - name: Run tests
-        run: docker run --entrypoint '/bin/sh' $IMAGE_TAG -c 'npm run test'
+        run: docker run $IMAGE_TAG sh -c 'npm run test'
