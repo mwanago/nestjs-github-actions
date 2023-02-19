@@ -27,7 +27,7 @@ import { TestModule } from './test/test.module';
     DatabaseModule,
     AuthenticationModule,
     UsersModule,
-    TestModule
+    TestModule,
   ],
   controllers: [],
   providers: [],
