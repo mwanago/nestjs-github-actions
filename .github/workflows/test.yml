@@ -17,8 +17,8 @@ jobs:
           docker build -t $IMAGE_TAG --target=create-build .
 
   check-formatting:
-    - name: Run prettier
-      env:
-        IMAGE_TAG: nestjs-api
-      run: |
-        docker run --entrypoint '/bin/sh' $IMAGE_TAG -c 'npm run format:check'
+    name: Run prettier
+    env:
+      IMAGE_TAG: nestjs-api
+    run: |
+      docker run --entrypoint '/bin/sh' $IMAGE_TAG -c 'npm run format:check'
