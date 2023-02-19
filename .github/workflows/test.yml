@@ -6,9 +6,10 @@ env:
   IMAGE_TAG: nestjs-api
 
 jobs:
-  create-docker-image:
-    name: Build the Docker image
+  test:
+    name: Run tests
     runs-on: ubuntu-latest
+    needs: create-docker-image
     steps:
       - name: Check out the repository
         uses: actions/checkout@v3
@@ -16,11 +17,7 @@ jobs:
       - name: Build the docker image
         run: |
           docker build -t $IMAGE_TAG --target=create-build .
-  test:
-    name: Run prettier
-    runs-on: ubuntu-latest
-    needs: create-docker-image
-    steps:
+
       - name: Run prettier
         run: |
           docker run --entrypoint '/bin/sh' $IMAGE_TAG -c 'npm run format:check'
