@@ -4,7 +4,7 @@ on: [pull_request]
 
 jobs:
   create-docker-image:
-    name: Build and push the Docker image to ECR
+    name: Build the Docker image
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
@@ -16,9 +16,16 @@ jobs:
         run: |
           docker build -t $IMAGE_TAG --target=create-build .
 
+  test:
+    name: Test the code
+
   check-formatting:
     name: Run prettier
-    env:
-      IMAGE_TAG: nestjs-api
-    run: |
-      docker run --entrypoint '/bin/sh' $IMAGE_TAG -c 'npm run format:check'
+    runs-on: ubuntu-latest
+    needs: create-docker-image
+    steps:
+      - name: Run prettier
+        env:
+          IMAGE_TAG: nestjs-api
+        run: |
+          docker run --entrypoint '/bin/sh' $IMAGE_TAG -c 'npm run format:check'
