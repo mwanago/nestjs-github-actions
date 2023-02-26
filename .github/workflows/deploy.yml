@@ -51,4 +51,4 @@ jobs:
 
       - name: Update ECS service
         run: |
-          aws ecs update-service --cluster nest_cluster --service nestjs_service --task-definition nest_task --force-new-deployment
+          aws ecs update-service --cluster {{ env.AWS_CLUSTER_NAME }} --service {{ env.AWS_SERVICE_NAME }} --task-definition {{ env.AWS_TASK_DEFINITION_NAME }} --force-new-deployment
