@@ -7,6 +7,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { UsersModule } from './users/users.module';
 import { CategoriesModule } from './categories/categories.module';
 import { TestModule } from './test/test.module';
+import HealthModule from './health/health.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { TestModule } from './test/test.module';
     AuthenticationModule,
     UsersModule,
     TestModule,
+    HealthModule,
   ],
   controllers: [],
   providers: [],
